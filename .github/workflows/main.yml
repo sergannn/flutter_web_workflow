@@ -18,13 +18,13 @@ jobs:
         with:
           channel: stable
           cache: true
-
-      # 3. Получаем зависимости
-      - name: Install dependencies
-        run: flutter pub get
       # 4. flutter create Web (результат появится в build/web)
       - name: Build Web
         run: flutter create .
+      # 3. Получаем зависимости
+      - name: Install dependencies
+        run: flutter pub get
+
       # 4. Собираем Web (результат появится в build/web)
       - name: Build Web
         run: flutter build web
