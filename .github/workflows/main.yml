@@ -30,7 +30,7 @@ jobs:
         run: flutter build web
       - name: Commit and Push build/web
         run: |
-          git add build/web
+          git add build/web -f
           git commit -m "Auto-build: update build/web [skip ci]" || echo "No changes to commit"
           git push https://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@github.com/sergannn/flutter_web_workflow.git
    
