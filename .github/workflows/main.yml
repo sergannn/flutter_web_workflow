@@ -1,0 +1,42 @@
+name: Flutter Build Web and APK
+on:
+  push:
+    branches: [ "main" ]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Клонируем код
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Устанавливаем Flutter (кеш включён для ускорения)
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      # 3. Получаем зависимости
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 4. Собираем Web (результат появится в build/web)
+      - name: Build Web
+        run: flutter build web
+
+   
+
+      # 6. Собираем APK (результат появится в build/app/outputs/flutter-apk/)
+      #- name: Build APK
+      #  run: flutter build apk --release
+
+      # 7. Сохраняем APK как артефакт
+      #- name: Upload APK Artifact
+      #  uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
